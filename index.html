@@ -1,0 +1,277 @@
+cat > /mnt/user-data/outputs/portfolio.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>فارس الغامدي — مطور ويب ومبرمج واجهات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0E14; --surface:#131722; --surface2:#1A2030; --line:#262D3D;
+    --ink:#EFF1F5; --ink-dim:#8D94A6; --accent:#F2B84B; --accent-ink:#0B0E14;
+    --accent2:#5B8DEF;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg:#0B0E14; --surface:#131722; --surface2:#1A2030; --line:#262D3D;
+      --ink:#EFF1F5; --ink-dim:#8D94A6; --accent:#F2B84B; --accent-ink:#0B0E14;
+    }
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    background:var(--bg); color:var(--ink); font-family:'Tajawal',sans-serif;
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+    line-height:1.75; overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+  nav{position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); background:rgba(11,14,20,.85); border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:16px; padding-bottom:16px;}
+  .logo{font-weight:900; font-size:20px;}
+  .logo span{color:var(--accent);}
+  .navlinks{display:flex; gap:26px; font-size:15px; color:var(--ink-dim);}
+  .navlinks a:hover{color:var(--ink);}
+  .burger{display:none; background:none; border:none; color:var(--ink); font-size:24px; cursor:pointer;}
+
+  section{padding:84px 0;}
+  .hero{padding-top:60px; padding-bottom:60px; min-height:calc(100vh - 68px); display:flex; align-items:center;}
+  .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:48px; align-items:center;}
+  .eyebrow{color:var(--accent); font-size:15px; font-weight:700; margin-bottom:14px;}
+  h1{font-size:52px; font-weight:900; line-height:1.18; margin-bottom:20px;}
+  .lead{font-size:18px; color:var(--ink-dim); max-width:48ch; margin-bottom:32px;}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:14px 26px; border-radius:10px; font-weight:700; font-size:15px; cursor:pointer; border:1px solid transparent; transition:transform .15s ease;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--accent); color:var(--accent-ink);}
+  .btn-ghost{background:transparent; border-color:var(--line); color:var(--ink);}
+  .portrait{aspect-ratio:1/1; border-radius:22px; background:linear-gradient(155deg,#1A2030,#232A3D); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;}
+  .portrait b{font-size:72px; font-weight:900; color:var(--accent);}
+  .portrait::after{content:'< / >'; position:absolute; bottom:18px; left:18px; font-family:'IBM Plex Mono',monospace; color:var(--accent2); font-size:14px; opacity:.6;}
+
+  h2{font-size:32px; font-weight:900; margin-bottom:10px;}
+  .section-lead{color:var(--ink-dim); font-size:16px; max-width:62ch; margin-bottom:42px;}
+
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
+  .about-grid p{color:var(--ink-dim); margin-bottom:16px; font-size:16px;}
+  .brand-box{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px;}
+  .brand-box b{color:var(--accent); font-size:18px; display:block; margin-bottom:8px;}
+  .brand-box span{color:var(--ink-dim); font-size:14px;}
+  .edu-line{display:flex; gap:12px; align-items:flex-start; margin-top:22px; font-size:14px; color:var(--ink-dim);}
+  .edu-dot{width:8px; height:8px; border-radius:50%; background:var(--accent2); margin-top:7px; flex:none;}
+
+  .skills-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .skill-card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; text-align:center; font-size:14px; font-weight:700;}
+  .skill-card:hover{border-color:var(--accent2);}
+
+  .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .pcard{background:var(--surface); border:1px solid var(--line); border-radius:16px; overflow:hidden; display:flex; flex-direction:column;}
+  .pcard-img{aspect-ratio:16/10; background:linear-gradient(135deg,var(--surface2),#202740); display:flex; align-items:center; justify-content:center; font-size:13px; color:var(--ink-dim);}
+  .pcard-body{padding:20px; flex:1; display:flex; flex-direction:column;}
+  .pcard-tag{font-size:12px; color:var(--accent); font-weight:700; margin-bottom:6px;}
+  .pcard-title{font-size:18px; font-weight:700; margin-bottom:8px;}
+  .pcard-desc{font-size:14px; color:var(--ink-dim); margin-bottom:16px; flex:1;}
+  .pcard-link{font-size:14px; font-weight:700; color:var(--accent2); display:inline-flex; align-items:center; gap:6px;}
+
+  .cred-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+  .cred-card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:22px; display:flex; gap:16px; align-items:flex-start;}
+  .cred-icon{width:44px; height:44px; border-radius:10px; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:20px; flex:none;}
+  .cred-card b{display:block; font-size:16px; margin-bottom:4px;}
+  .cred-card span{font-size:13px; color:var(--ink-dim);}
+
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-size:14px; color:var(--ink-dim); margin-bottom:8px;}
+  .field input, .field textarea{width:100%; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:13px 16px; color:var(--ink); font-family:inherit; font-size:15px;}
+  .field textarea{resize:vertical; min-height:120px;}
+  .field input:focus, .field textarea:focus{outline:2px solid var(--accent); outline-offset:2px;}
+  .social-list{display:flex; flex-direction:column; gap:14px;}
+  .social-item{display:flex; align-items:center; gap:14px; padding:16px 18px; border:1px solid var(--line); border-radius:12px; background:var(--surface);}
+  .social-item b{display:block; font-size:15px;}
+  .social-item span{font-size:13px; color:var(--ink-dim); direction:ltr; display:inline-block;}
+  .dot{width:10px; height:10px; border-radius:50%; background:var(--accent); flex:none;}
+
+  footer{border-top:1px solid var(--line); padding:28px 0; text-align:center; color:var(--ink-dim); font-size:14px;}
+
+  @media (max-width:860px){
+    .navlinks{display:none;}
+    .burger{display:block;}
+    .hero-grid, .about-grid, .contact-grid, .cred-grid{grid-template-columns:1fr;}
+    .projects{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:repeat(2,1fr);}
+    h1{font-size:36px;}
+    .hero{padding-top:36px;}
+    section{padding:56px 0;}
+    .portrait{max-width:220px; margin:0 auto;}
+    .portrait b{font-size:50px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">فارس<span>.</span></div>
+    <div class="navlinks">
+      <a href="#about">عني</a>
+      <a href="#skills">المهارات</a>
+      <a href="#projects">المشاريع</a>
+      <a href="#credentials">الشهادات</a>
+      <a href="#contact">تواصل</a>
+    </div>
+    <button class="burger" onclick="document.getElementById('mnav').classList.toggle('open')">☰</button>
+  </div>
+  <div id="mnav" style="display:none; flex-direction:column; gap:4px; padding:0 24px 18px;">
+    <a href="#about" style="padding:10px 0; border-top:1px solid var(--line);">عني</a>
+    <a href="#skills" style="padding:10px 0; border-top:1px solid var(--line);">المهارات</a>
+    <a href="#projects" style="padding:10px 0; border-top:1px solid var(--line);">المشاريع</a>
+    <a href="#credentials" style="padding:10px 0; border-top:1px solid var(--line);">الشهادات</a>
+    <a href="#contact" style="padding:10px 0; border-top:1px solid var(--line);">تواصل</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow mono">Shefrize — شِفْرَايز</div>
+      <h1>فارس سعيد الغامدي<br>مطور ويب ومبرمج واجهات</h1>
+      <p class="lead">أحوّل الأفكار إلى مواقع وتطبيقات رقمية سلسة واحترافية، ببناء أنظمة متكاملة وقواعد بيانات موثوقة، وتجربة مستخدم نظيفة من أول سطر كود حتى آخر تفصيلة.</p>
+      <div class="cta-row">
+        <a href="#projects" class="btn btn-primary">استعرض مشاريعي</a>
+        <a href="#contact" class="btn btn-ghost">تواصل معي</a>
+      </div>
+    </div>
+    <div class="portrait"><b>ف.غ</b></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <h2>نبذة عني</h2>
+      <p>مطور ويب شغوف بتحويل الأفكار إلى مواقع وتطبيقات رقمية سلسة واحترافية. أملك خبرة في بناء الأنظمة وإدارة قواعد البيانات، ودايم أسعى لتقديم تجربة مستخدم مميزة ونظيفة في كل مشروع أشتغل عليه.</p>
+      <div class="edu-line"><span class="edu-dot"></span><span>تقنية البرمجة وتطوير الويب — الكلية التقنية بالباحة</span></div>
+      <div class="edu-line"><span class="edu-dot"></span><span>وثيقة عمل حر معتمدة من وزارة الموارد البشرية والتنمية الاجتماعية</span></div>
+    </div>
+    <div class="brand-box">
+      <b class="mono">Shefrize / شِفْرَايز</b>
+      <span>علامتي التجارية لتقديم الحلول البرمجية والمنتجات الرقمية التفاعلية — من تطوير المواقع إلى بناء الأنظمة المخصصة لعملاء الأعمال الحرة.</span>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>المهارات التقنية</h2>
+    <p class="section-lead">الأدوات واللغات التي أستخدمها يومياً في بناء المنتجات الرقمية.</p>
+    <div class="skills-grid">
+      <div class="skill-card">HTML5</div>
+      <div class="skill-card">CSS3</div>
+      <div class="skill-card">JavaScript</div>
+      <div class="skill-card">PHP</div>
+      <div class="skill-card">Java</div>
+      <div class="skill-card">SQL</div>
+      <div class="skill-card">MySQL</div>
+      <div class="skill-card">Bootstrap 5</div>
+      <div class="skill-card">Tailwind CSS</div>
+      <div class="skill-card">VS Code</div>
+      <div class="skill-card">XAMPP</div>
+      <div class="skill-card">Git & GitHub</div>
+      <div class="skill-card">منصة سلة</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>معرض الأعمال</h2>
+    <p class="section-lead">مشاريع بارزة من مسيرتي في تطوير الأنظمة والمنتجات الرقمية.</p>
+    <div class="projects">
+      <div class="pcard">
+        <div class="pcard-img">الثلاجة الذكية</div>
+        <div class="pcard-body">
+          <div class="pcard-tag mono">PWA · PHP · MySQL</div>
+          <div class="pcard-title">الثلاجة الذكية</div>
+          <div class="pcard-desc">تطبيق ويب تقدمي لإدارة المخزون الغذائي والمنزلي عبر مسح الباركود، مبني بـ HTML و CSS و JavaScript و PHP و MySQL.</div>
+          <a href="https://github.com/algamdifare789-eng" target="_blank" class="pcard-link">عرض على GitHub ←</a>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img">شِفْرَايز Store</div>
+        <div class="pcard-body">
+          <div class="pcard-tag mono">منصة رقمية</div>
+          <div class="pcard-title">متجر شِفْرَايز</div>
+          <div class="pcard-desc">منصة رقمية لتقديم الخدمات البرمجية والمنتجات الرقمية، تجمع بين هوية احترافية وتجربة شراء سلسة.</div>
+          <a href="https://github.com/algamdifare789-eng" target="_blank" class="pcard-link">عرض على GitHub ←</a>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-img">هندسة النظم</div>
+        <div class="pcard-body">
+          <div class="pcard-tag mono">تحليل نظم</div>
+          <div class="pcard-title">ملاعيب + محرك البحث الأخلاقي</div>
+          <div class="pcard-desc">نظام "ملاعيب" لحجز الساحات الرياضية، ومشروع محرك البحث الأخلاقي للمنتجات ضمن مقررات هندسة النظم وتحليلها.</div>
+          <a href="https://github.com/algamdifare789-eng" target="_blank" class="pcard-link">عرض على GitHub ←</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="credentials">
+  <div class="wrap">
+    <h2>الشهادات والاعتمادات</h2>
+    <p class="section-lead">اعتماداتي الرسمية وشهاداتي المهنية.</p>
+    <div class="cred-grid">
+      <div class="cred-card">
+        <div class="cred-icon">📄</div>
+        <div><b>وثيقة العمل الحر</b><span>معتمدة من وزارة الموارد البشرية والتنمية الاجتماعية.</span></div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-icon">🎓</div>
+        <div><b>شهادة تصميم جرافيك</b><span>من منصة كورسيرا (Coursera).</span></div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-icon">🤖</div>
+        <div><b>شهادة في الذكاء الاصطناعي</b><span>من منصة كورسيرا (Coursera).</span></div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-icon">🔒</div>
+        <div><b>شهادة في الأمن السيبراني</b><span>من منصة كورسيرا (Coursera).</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2>تواصل معي</h2>
+      <p class="section-lead">عندك مشروع أو فكرة تبي تطورها؟ راسلني وبرد عليك بأقرب وقت.</p>
+      <form onsubmit="event.preventDefault(); this.querySelector('.sent').style.display='block';">
+        <div class="field"><label>الاسم</label><input type="text" required placeholder="اسمك الكامل"></div>
+        <div class="field"><label>البريد الإلكتروني</label><input type="email" required placeholder="example@email.com"></div>
+        <div class="field"><label>الرسالة</label><textarea required placeholder="اكتب رسالتك هنا..."></textarea></div>
+        <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
+        <p class="sent" style="display:none; color:var(--accent); margin-top:12px; font-size:14px;">تم إرسال رسالتك بنجاح — شكراً لتواصلك.</p>
+      </form>
+    </div>
+    <div class="social-list">
+      <a class="social-item" href="mailto:gfcffgjb1248@gmail.com"><span class="dot"></span><div><b>البريد الإلكتروني</b><span>gfcffgjb1248@gmail.com</span></div></a>
+      <a class="social-item" href="tel:+966531176388"><span class="dot"></span><div><b>الجوال</b><span>0531176388</span></div></a>
+      <a class="social-item" href="https://github.com/algamdifare789-eng" target="_blank"><span class="dot"></span><div><b>GitHub</b><span>github.com/algamdifare789-eng</span></div></a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 فارس سعيد الغامدي — Shefrize. جميع الحقوق محفوظة.</footer>
+
+</body>
+</html>
+HTMLEOF
+echo done
